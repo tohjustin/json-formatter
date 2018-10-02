@@ -1,13 +1,12 @@
 {
-  "name": "JSON Formatter",
-  "version": "0.6.0",
+  "name": "JSON Formatter (forked)",
+  "version": "1.0.0",
   "manifest_version": 2,
-  "description": "Makes JSON easy to read. Open source.",
-  "homepage_url": "https://github.com/callumlocke/json-formatter",
-  "minimum_chrome_version": "21",
+  "description": "Formats JSON output, auto-formats timestamps to ISO-8061 (nanosecond precision)",
+  "homepage_url": "https://github.com/tohjustin/json-formatter",
   "icons": {
-       "128": "icons/128.png",
-       "32": "icons/32.png"
+    "128": "icons/128.png",
+    "32": "icons/32.png"
   },
   "background": {
     "scripts": ["js/background.js"]
