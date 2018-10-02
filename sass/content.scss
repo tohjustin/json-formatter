@@ -195,6 +195,13 @@ pre {
   .k { /* key */
     color: black ;
   }
+  .timestamp { /* auto-formatted timestamp value */
+    background-color: #4C69A1;
+    border-radius: 2px;
+    color: white;
+    margin-left: 4px;
+    padding: 0 4px;
+  }
 
 #formattingMsg {
   font: 13px "Lucida Grande", "Segoe UI", "Tahoma" ;

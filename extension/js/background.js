@@ -43,6 +43,11 @@
   const TYPE_NULL = 6;
 
   // Utility functions
+
+  function numDigits(x) {
+    return x.toString().length;
+  }
+
   function removeComments(commentStr) {
     const str = (`__${commentStr}__`).split('');
     const mode = {
@@ -272,6 +277,28 @@
             // Add comma
             comma = templates.t_commaText.cloneNode();
             childKvov.appendChild(comma);
+
+            // append auto-formatted ISO-8061 string if JSON value looks like a timestamp
+            if (k === 'timestamp' || (typeof value[k] === 'number' && numDigits(value[k]) > 12)) {
+              let formattedValue;
+
+              if (numDigits(value[k]) > 18) {
+                const nanoseconds = value[k].toString().substr(-6);
+                formattedValue = new Date(value[k] / 1000000).toISOString();
+                formattedValue = formattedValue.replace('Z', `${nanoseconds}Z`);
+              } else if (numDigits(value[k]) > 15) {
+                const microseconds = value[k].toString().substr(-3);
+                formattedValue = new Date(value[k] / 1000).toISOString();
+                formattedValue = formattedValue.replace('Z', `${microseconds}Z`);
+              } else {
+                formattedValue = new Date(value[k]).toISOString();
+              }
+
+              valueElement = templates.t_timestamp.cloneNode(false);
+              valueElement.innerText = formattedValue;
+              childKvov.appendChild(valueElement);
+            }
+
             blockInner.appendChild(childKvov);
           });
           // Now remove the last comma
